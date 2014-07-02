@@ -29,9 +29,9 @@ by Lawrence Liu
 ### [Data Structure](http://adv-r.had.co.nz/Data-structures.html)
 1. R has no 0-dimensional, or scalar types. The most basic class is **atomic vector**.
 2. vectors comes in two flavors: atomic vectors and lists. They have three common properties:
- * Type, `typeof()`, what it is.
- * Length, `legnth()` how many elements it contains.
- * Attributes, `atrributes()`, additional arbitrary metadata.
+   * Type, `typeof()`, what it is.
+   * Length, `legnth()` how many elements it contains.
+   * Attributes, `atrributes()`, additional arbitrary metadata.
 3. Use `is.atomic(x) || is.list(x)` to test if an object is actually a vector.
 4. `c()` is short for combine.
 5. R considers `db_var <- c(1, 2, 3)` as double vector, it we want to create integer vector, we should use `int_var <- c(1L, 2L, 3L)`.
