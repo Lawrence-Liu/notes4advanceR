@@ -50,4 +50,5 @@ by Lawrence Liu
 18. While factors look (and often behave) like character vectors, they are actually integers. 
 19. Some string methods (like `gsub()` and `grepl()`) will coerce factors to strings, while others (like `nchar()`) will throw an error, and still others (like `c()`) will use the underlying integer values. So we should explicitly convert factors to character vectors.
 20. Matrices and arrays are atomic vectors with a `dim()` attribute.
-21. 
+21. A data frame is a list, and also a matrix, so it has some strange behavior. `names()` can't be applied to a matrix, but can be applied to a data frame. Because when we apply `names()` to a data frame, we consider it as a list. 
+22. When combining column-wise, both the number and names of columns must match.
