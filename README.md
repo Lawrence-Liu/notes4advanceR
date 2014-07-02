@@ -86,7 +86,7 @@ by Lawrence Liu
 1. `exists`: test if an R object exists.
 
 #### Help
-1.`apropos()` and `find()`: look for objects named in parameter.
+1. `apropos()` and `find()`: look for objects named in parameter.
 
 
 #### Files and directories
