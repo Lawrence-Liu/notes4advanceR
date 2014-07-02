@@ -29,9 +29,9 @@ by Lawrence Liu
 ### [Data Structure](http://adv-r.had.co.nz/Data-structures.html)
 1. R has no 0-dimensional, or scalar types. The most basic class is **atomic vector**.
 2. vectors comes in two flavors: atomic vectors and lists. They have three common properties:
- * Type, `typeof()`, what it is.
- * Length, `legnth()` how many elements it contains.
- * Attributes, `atrributes()`, additional arbitrary metadata.
+   * Type, `typeof()`, what it is.
+   * Length, `legnth()` how many elements it contains.
+   * Attributes, `atrributes()`, additional arbitrary metadata.
 3. Use `is.atomic(x) || is.list(x)` to test if an object is actually a vector.
 4. `c()` is short for combine.
 5. R considers `db_var <- c(1, 2, 3)` as double vector, it we want to create integer vector, we should use `int_var <- c(1L, 2L, 3L)`.
@@ -50,5 +50,10 @@ by Lawrence Liu
 18. While factors look (and often behave) like character vectors, they are actually integers. 
 19. Some string methods (like `gsub()` and `grepl()`) will coerce factors to strings, while others (like `nchar()`) will throw an error, and still others (like `c()`) will use the underlying integer values. So we should explicitly convert factors to character vectors.
 20. Matrices and arrays are atomic vectors with a `dim()` attribute.
-21. A data frame is a list, and also a matrix, so it has some strange behavior. `names()` can't be applied to a matrix, but can be applied to a data frame. Because when we apply `names()` to a data frame, we consider it as a list. 
-22. When combining column-wise, both the number and names of columns must match.
+
+### [Subsetting](http://adv-r.had.co.nz/Subsetting.html)
+1. **Nothing** returns whole vector. `x[]` returns all elements of x.
+2. `outer()` is a very helpful function.
+3. You can also subset higher-dimensional data structures with an integer matrix (or, if named, a character matrix)  *I didn't know this before!*
+4. We can use **matrix subsetting** and **list subsetting** to subset a data frame. One thing worth noting is that if I select one single column, matrix subsetting simplifies by default, while list subsetting does not.
+5. S3 objects are made up of atomic vectors, arrays and lists, so you can always pull apart an S3 object using the techniques described above and the knowledge you gain from `str()`.
