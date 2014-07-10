@@ -110,3 +110,60 @@ by Lawrence Liu
 10. Use commented lines of `-` and `=` to break up your file into easily readable chunks.
 
 ### [Functions](http://adv-r.had.co.nz/Functions.html)
+1. The three components of a function are its body, arguments and environment. We can use `body()`, `formals()` and `environment()` to extract the three components.
+2. There is one exception to the above rule. Primitive functions, like `sum()`, calls C code directly with `.Primitive()` and contain no R code. Their three components are all `NULL`.
+3. Primitive functions are only found in the `base` package. 
+4. `is.function` and `is.primitive()` check whether its argument is a (primitive) function. *So every time I name a variable, I can use exist() to check if I already gave another variable the same name*.
+5. Scoping is the set of rules that govern how R looks up the value of a symbol.
+6. R has two types of scoping: lexical scoping and dynamic scoping.
+7. There are four basic principles behind R's implementation of lexical scoping:
+   * name masking
+   * functions vs. variables
+   * a fresh start
+   * dynamic lookup
+8. If you are using a name in a context where it's obvious that you want a function (e.g. `f(3)`), R will ignore objects that are not functions while it is searching.
+9. Every time a function is called, a new environment is created to host execution. 
+10. R uses dynamic lookup, R looks for values when the function is run, not when it's created. This means that the output of a function can be different depending on objects outside its environment.
+11. However, it's never possible to make a function completely self-contained because you must always rely on functions defined in base R or other packages.
+12. All standard operators in R are actually functions.
+13. Everything that exists is an object. Everything that happens is a function call.
+14. When we use `+` inside sapply, we can use `+` and ``. 
+15. The formal arguments are a property of the function, whereas the actual or calling arguments can vary each time you call the function.
+16. When calling a function you can specify arguments by position, by complete name, or by partial name. And the priority is exact name, prefix matching, and by position.
+17. `do.call()` constructs and executes a function call from a name or a function and a list of arguments to be passed to it.
+18. Since arguments in R are evaluated lazily (more on that below), the default value can be defined in terms of other arguments. E.g., `f <- function(a = 1, b = a * 2)`
+19. Default arguments can even be defined in terms of variables created within the function. This is used frequently in base R functions. E.g.,  `h <- function(a = 1, b = d)  d <- (a + 1) ^2; c(a, b)`. This is frequently used in base R functions.
+20. `missing()`:  used to test whether a value was specified as an argument to a function.
+21. By default, R functions are lazy - they're only evaluated if they're actually used.  
+22. If you want to ensure that an argument is evaluated you can use `force`.
+23. *This is very tricky when using `sapply` or loop to create closures.*
+24. Default arguments are evaluated inside the function. This means that if the expression depends on the current environment the results will differ depending on whether you use the default value or explicitly provide one.
+25. The argument `...` will match any arguments not otherwise matched. 
+26. infix and prefix function, and how to create our own infix function.
+27. Some functions can be used to alter the value of an object, they are called  replacement functions. 
+28. Replacement functions actually create a modified copy.
+29. `pryr:address()` can be used to find the memory address of the underlying object.
+30. Built in functions that are implemented using .Primitive will modify in place. *This explains why changing the name of a very large object can be memory-consuming*.
+31. Functions can return `invisible` values, which are not printed out by default when you call the function. E.g., the most common function returns invisibly is `<-`.
+32. What `library()` does is loading a package and modifying the search path.
+
+
+### [OO field guide](http://adv-r.had.co.nz/OO-essentials.html)
+
+### [Environments](http://adv-r.had.co.nz/Environments.html)
+1. The job of an environment is to associate, or bind, a set of names to a set of values. You can think of an environment as a bag of names. Each name points to an object stored elsewhere in memory.
+2. If an object has no names pointing to it, it gets automatically deleted by the garbage collector(`gc`).
+3. Every environment has a parent except empty environment. But given an environment, we have no way to find its children.
+4. Generally an environment is similar to a list, with four important exceptions:
+	* Every object in an environment has a unique name
+	* The objects in an environment are not ordered. 
+	* An environment has a parent.
+	* Environments have reference semantics.
+5. Four special environments: `globalenv()`, `baseenv()`, `emptyenv()`, `environment()`.
+6. The default parent provided by `new.env()` is environment from which it is called. 
+7. The easiest way to modify the bindings in an environment is to treat it like a list.
+8. By default, ls() only shows names that don't begin with `.`
+9. To compare environments, you must use `identical()` not `==`.
+10. The enclosing environment is the environment where the function was created. Every function has one and only one enclosing environment. We can find the enclosing environment of a function by calling `environment()` with a function as its first argument.
+11. The enclosing function determines how the function finds values; the binding environments determine how we find  the function.
+12. 
